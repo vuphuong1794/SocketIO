@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Room</title>
     <style>
-        * {
+       * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -28,6 +28,28 @@
             overflow-y: scroll;
             margin-bottom: 20px;
             padding: 16px;
+        }
+
+        .message {
+            max-width: 70%;
+            margin: 8px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            word-wrap: break-word;
+        }
+
+        .message.received {
+            background-color: #e9ecef;
+            align-self: flex-start;
+            margin-right: auto;
+            color: #1a1a1a;
+        }
+
+        .message.sent {
+            background-color: #0084ff;
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
         }
 
         #form {
@@ -82,7 +104,6 @@
             max-width: 150px;
         }
 
-        /* Responsive Design */
         @media (max-width: 600px) {
             #form {
                 flex-direction: column;
@@ -97,8 +118,6 @@
     </style>
 </head>
 <body>
-    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-    <script src="script.js"></script>
     <div id="message-container"></div>
     <form id="form">
         <label for="message-input">Message</label>
@@ -108,5 +127,7 @@
         <input type="text" id="room-input" placeholder="Enter room name">
         <button type="button" id="room-button">Join</button>
     </form>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

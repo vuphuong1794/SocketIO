@@ -27,10 +27,12 @@ form.addEventListener("submit", (e) => {
   messageInput.value = "";
 });
 
-//nhắn tin riêng với nhóm chat
+//Group chat
 joinRoomButton.addEventListener("click", () => {
   const room = roomInput.value;
-  socket.emit("join-room", room);
+  socket.emit("join-room", room, message => {
+    displayMessage(message, "received");
+  });
 });
 
 function displayMessage(message, type) {

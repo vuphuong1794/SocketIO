@@ -20,21 +20,24 @@ form.addEventListener("submit", (e) => {
 
   if (message === "") return;
 
-  socket.emit("send-message", message);
+  socket.emit("send-message", message, room);
 
   displayMessage(message, "sent");
 
   messageInput.value = "";
 });
 
+//nhắn tin riêng với nhóm chat
 joinRoomButton.addEventListener("click", () => {
   const room = roomInput.value;
+  socket.emit("join-room", room);
 });
 
 function displayMessage(message, type) {
   const div = document.createElement("div");
 
   div.textContent = message;
-    div.classList.add("message", type);
+  div.classList.add("message", type);
+
   document.getElementById("message-container").appendChild(div);
 }

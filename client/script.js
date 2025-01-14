@@ -3,6 +3,8 @@ const roomInput = document.getElementById('room-input');
 const messageInput = document.getElementById('message-input');
 const form = document.getElementById('form');
 
+const socket = io('http://localhost:3000');
+
 form.addEventListener('submit', e => {
     e.preventDefault();
     const message = messageInput.value;

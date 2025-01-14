@@ -4,15 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Room</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #message-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 300px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+            padding: 16px;
+        }
+
+        #form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            flex: 1;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0084ff;
+            box-shadow: 0 0 0 2px rgba(0, 132, 255, 0.2);
+        }
+
+        button {
+            background-color: #0084ff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #0066cc;
+        }
+
+        #message-input {
+            min-width: 200px;
+        }
+
+        #room-input {
+            max-width: 150px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            #form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            input, button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
 </head>
 <body>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="script.js"></script>
     <div id="message-container"></div>
     <form id="form">
         <label for="message-input">Message</label>
-        <input type="text" id="message-input">
+        <input type="text" id="message-input" placeholder="Type your message...">
         <button type="submit" id="send-button">Send</button>
         <label for="room-input">Room</label>
-        <input type="text" id="room-input">
+        <input type="text" id="room-input" placeholder="Enter room name">
         <button type="button" id="room-button">Join</button>
     </form>
 </body>

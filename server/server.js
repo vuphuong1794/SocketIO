@@ -7,6 +7,26 @@ const io = require("socket.io")(3000, {
     debug: true
 });
 
+//middleware
+const userIo = io.of('/user'); //namespace
+
+userIo.on('connection', socket => {
+    console.log('Connected to user namespace with username: ', socket.username);
+});
+
+userIo.use((socket, next) => {
+    if(socket.handshake.auth.token){
+        socket.username = getUsernameFromToken(socket.handshake.auth.token);
+        next();
+    } else{
+        next(new Error('Please send token'));
+    }
+});
+
+function getUsernameFromToken(token){
+    return token;
+}
+
 io.on('connection', socket => {
     socket.on('send-message', (message, room) => {
         if(room === '') {
@@ -21,7 +41,9 @@ io.on('connection', socket => {
         socket.join(room);
         cb(`Joined ${room}`); //callback thông báo đã join room
     });
-    
+    socket.on('ping', (count) => {
+        console.log('ping', count);
+    });
 });
 
 instrument(io, {auth: false}); //admin ui
